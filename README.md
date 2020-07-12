@@ -11,5 +11,5 @@ $ bundle install
 # Running
 
 ```
-$ bundle exec rackup
+$ bundle exec shotgun config.ru
 ```
