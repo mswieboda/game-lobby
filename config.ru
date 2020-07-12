@@ -1,33 +1,28 @@
 require "roda"
+require "json"
 
 class App < Roda
   route do |r|
-    # GET / request
-    r.root do
-      r.redirect "/hello"
-    end
-
-    # /hello branch
-    r.on "hello" do
-      # Set variable for all routes in /hello branch
-      @greeting = 'Hello'
-
-      # GET /hello/world request
-      r.get "world" do
-        "#{@greeting} world!"
+    r.on "lobbies" do
+      # GET /lobbies
+      r.get do
+        [{ip: "123.168.1.1", name: "foo", status: "open", peers: 5, max_peers: 10}].to_json
       end
 
-      # /hello request
-      r.is do
-        # GET /hello request
+      # GET /lobbies/5
+      r.on Integer do |lobby_id|
         r.get do
-          "#{@greeting}!"
+          {ip: "123.168.1.1", name: "foo", status: "open", peers: 5, max_peers: 10}.to_json
         end
 
-        # POST /hello request
-        r.post do
-          puts "Someone said #{@greeting}!"
-          r.redirect
+        # POST /lobbies/5/join
+        r.post "join" do
+          {ip: "123.168.1.1", name: "foo", status: "open", peers: 6, max_peers: 10}.to_json
+        end
+
+        # POST /lobbies/5/leave
+        r.post "leave" do
+          {ip: "123.168.1.1", name: "foo", status: "open", peers: 5, max_peers: 10}.to_json
         end
       end
     end
