@@ -4,6 +4,8 @@ require './models/lobby'
 require 'json'
 
 class App < Roda
+  plugin :all_verbs
+
   route do |r|
     r.on "lobbies" do
       # GET /lobbies/5
@@ -16,8 +18,8 @@ class App < Roda
           lobby.to_json
         end
 
-        # POST /lobbies/5/leave
-        r.post "leave" do
+        # DELETE /lobbies/5/leave
+        r.delete "leave" do
           lobby.update!(peers: lobby.peers - 1)
           lobby.to_json
         end
