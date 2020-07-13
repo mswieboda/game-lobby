@@ -5,7 +5,7 @@ class AddLobby < ActiveRecord::Migration[6.0]
       t.string :host
       t.string :status
       t.integer :peers
-      t.string :size
+      t.integer :size
 
       t.timestamps
     end
