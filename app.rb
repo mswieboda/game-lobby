@@ -27,7 +27,7 @@ class App < Roda
       r.post "create" do
         Lobby.create(
           name: r.params['name'],
-          host: r.params['host'],
+          host: r.host,
           peers: 1,
           status: "open",
           size: r.params['size']
