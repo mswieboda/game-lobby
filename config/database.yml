@@ -1,0 +1,4 @@
+host: localhost
+adapter: postgresql
+encoding: utf-8
+database: api_roda_development
