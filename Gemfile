@@ -4,6 +4,9 @@ gem 'roda'
 gem 'puma'
 gem 'shotgun'
 
-gem 'rake'
-gem 'pg'
 gem 'activerecord'
+gem 'sinatra-activerecord'
+gem 'pg'
+gem 'rake'
+
+gem 'pry'

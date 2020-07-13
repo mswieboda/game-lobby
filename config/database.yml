@@ -1,4 +1,11 @@
-host: localhost
-adapter: postgresql
-encoding: utf-8
-database: api_roda_development
+default: &default
+  adapter: postgresql
+  encoding: unicode
+
+development:
+  <<: *default
+  database: api_roda_development
+
+test:
+  <<: *default
+  database: api_roda_test
