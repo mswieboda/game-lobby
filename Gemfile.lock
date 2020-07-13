@@ -30,6 +30,7 @@ GEM
     rack (2.2.3)
     rack-protection (2.0.8.1)
       rack
+    rack-timeout (0.6.0)
     rake (13.0.1)
     roda (3.33.0)
       rack
@@ -58,10 +59,14 @@ DEPENDENCIES
   pg
   pry
   puma
+  rack-timeout
   rake
   roda
   shotgun
   sinatra-activerecord
+
+RUBY VERSION
+   ruby 2.5.3p105
 
 BUNDLED WITH
    1.17.3
