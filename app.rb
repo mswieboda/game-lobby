@@ -77,7 +77,12 @@ class App < Roda
       # GET /lobbies
       r.is do
         r.get do
-          Lobby.all.to_a.to_json
+          Lobby
+            .all
+            .where.not(status: "ended")
+            .order(updated_at: :desc)
+            .to_a
+            .to_json
         end
       end
     end
