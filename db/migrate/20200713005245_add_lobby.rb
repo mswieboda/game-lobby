@@ -3,6 +3,7 @@ class AddLobby < ActiveRecord::Migration[6.0]
     create_table :lobbies do |t|
       t.string :name
       t.string :host
+      t.string :status
       t.integer :peers
       t.string :size
 

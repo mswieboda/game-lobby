@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2020_07_13_005245) do
   create_table "lobbies", force: :cascade do |t|
     t.string "name"
     t.string "host"
+    t.string "status"
     t.integer "peers"
     t.string "size"
     t.datetime "created_at", precision: 6, null: false
