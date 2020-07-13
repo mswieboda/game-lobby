@@ -63,7 +63,8 @@ class App < Roda
 
         # DELETE /lobbies/:id/end
         r.delete "end" do
-          lobby.destroy.to_json
+          lobby.update(status: "ended")
+          lobby.to_json
         end
 
         r.is do
