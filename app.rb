@@ -1,5 +1,6 @@
 require './config/environment'
 require './models/application_record'
+require './models/game'
 require './models/lobby'
 require 'json'
 
@@ -22,10 +23,14 @@ class App < Roda
   end
 
   route do |r|
+    game_key = r.env['GAME_KEY']
+    game = Game.find_by(key: game_key)
+
     r.on "lobbies" do
       # POST /lobbies/create
       r.post "create" do
         Lobby.create(
+          game_id: game.id,
           name: r.params['name'],
           host: r.host,
           peers: 1,
@@ -35,7 +40,7 @@ class App < Roda
       end
 
       r.on Integer do |lobby_id|
-        lobby = Lobby.find(lobby_id)
+        lobby = Lobby.where(game_id: game_id).find(lobby_id)
 
         # POST /lobbies/:id/join
         r.post "join" do
