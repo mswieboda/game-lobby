@@ -84,6 +84,7 @@ class App < Roda
         r.get do
           Lobby
             .all
+            .where(game_id: game.id)
             .where.not(status: "ended")
             .order(updated_at: :desc)
             .to_a
