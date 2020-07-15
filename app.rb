@@ -23,8 +23,8 @@ class App < Roda
   end
 
   route do |r|
-    game_key = r.env['GAME_KEY']
-    game = Game.find_by(key: game_key)
+    game_key = r.env['HTTP_GAME_KEY']
+    game = Game.find_by!(key: game_key)
 
     r.on "lobbies" do
       # POST /lobbies/create
@@ -32,7 +32,7 @@ class App < Roda
         Lobby.create(
           game_id: game.id,
           name: r.params['name'],
-          host: r.host,
+          host: r.ip,
           peers: 1,
           status: "open",
           size: r.params['size']
@@ -40,7 +40,7 @@ class App < Roda
       end
 
       r.on Integer do |lobby_id|
-        lobby = Lobby.where(game_id: game_id).find(lobby_id)
+        lobby = Lobby.where(game_id: game.id).find(lobby_id)
 
         # POST /lobbies/:id/join
         r.post "join" do
