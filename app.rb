@@ -37,7 +37,8 @@ class App < Roda
           name: r.params['name'],
           peers: 1,
           status: "open",
-          size: r.params['size']
+          size: r.params['size'],
+          meta: r.params['meta']
         )
         lobby.to_json
       end
