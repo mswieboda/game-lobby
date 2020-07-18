@@ -29,15 +29,17 @@ class App < Roda
     r.on "lobbies" do
       # POST /lobbies/create
       r.post "create" do
-        Lobby.find_or_create_by!(
+        lobby = Lobby.find_or_create_by!(
           game_id: game.id,
           host: r.ip
-        ).update(
+        )
+        lobby.update(
           name: r.params['name'],
           peers: 1,
           status: "open",
           size: r.params['size']
-        ).to_json
+        )
+        lobby.to_json
       end
 
       r.on Integer do |lobby_id|
